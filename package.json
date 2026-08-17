@@ -8,7 +8,7 @@
     "build": "tsc -b && vite build",
     "lint": "oxlint",
     "preview": "vite preview",
-    "test": "NODE_OPTIONS=--localstorage-file=./.vitest-localstorage.json vitest run",
+    "test": "vitest run",
     "gen:api": "openapi-typescript http://127.0.0.1:8000/openapi.json -o src/api/schema.ts"
   },
   "dependencies": {
