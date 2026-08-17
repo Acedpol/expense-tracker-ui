@@ -1,25 +1,25 @@
-import { useQuery } from '@tanstack/react-query'
-import { apiClient } from './api/client'
+import { Navigate, Route, Routes } from "react-router-dom";
+import { DashboardPage } from "./pages/DashboardPage";
+import { LoginPage } from "./pages/LoginPage";
+import { RegisterPage } from "./pages/RegisterPage";
+import { ProtectedRoute } from "./routes/ProtectedRoute";
 
 function App() {
-  const { data, isPending, isError } = useQuery({
-    queryKey: ['health'],
-    queryFn: async () => {
-      const { data, error } = await apiClient.GET('/health')
-      if (error) throw error
-      return data
-    },
-  })
-
   return (
-    <div className="flex min-h-screen items-center justify-center bg-slate-50">
-      <h1 className="text-2xl font-semibold text-slate-800">
-        {isPending && 'Consultando /health del backend...'}
-        {isError && 'Error al conectar con el backend'}
-        {data && `Backend dice: ${data.status}`}
-      </h1>
-    </div>
-  )
+    <Routes>
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/register" element={<RegisterPage />} />
+      <Route
+        path="/"
+        element={
+          <ProtectedRoute>
+            <DashboardPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route path="*" element={<Navigate to="/" replace />} />
+    </Routes>
+  );
 }
 
-export default App
+export default App;
