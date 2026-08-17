@@ -205,7 +205,7 @@ export interface components {
             /** Description */
             description?: string | null;
             /** Date */
-            date?: null;
+            date?: string | null;
             /** Category Id */
             category_id?: number | null;
         };

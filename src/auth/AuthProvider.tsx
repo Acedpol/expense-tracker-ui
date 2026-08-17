@@ -1,5 +1,5 @@
-import { useCallback, useMemo, useState, type ReactNode } from "react";
-import { apiClient } from "../api/client";
+import { useCallback, useEffect, useMemo, useState, type ReactNode } from "react";
+import { apiClient, setUnauthorizedHandler } from "../api/client";
 import { extractErrorMessage } from "../lib/apiError";
 import { decodeJwtPayload } from "../lib/jwt";
 import { clearToken, getToken, setToken } from "../lib/token";
@@ -46,6 +46,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     clearToken();
     setTokenState(null);
   }, []);
+
+  useEffect(() => {
+    setUnauthorizedHandler(logout);
+  }, [logout]);
 
   const value = useMemo<AuthContextValue>(
     () => ({

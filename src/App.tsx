@@ -1,6 +1,7 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import { AppLayout } from "./layout/AppLayout";
 import { CategoriesPage } from "./pages/CategoriesPage";
+import { ExpensesPage } from "./pages/ExpensesPage";
 import { LoginPage } from "./pages/LoginPage";
 import { RegisterPage } from "./pages/RegisterPage";
 import { ProtectedRoute } from "./routes/ProtectedRoute";
@@ -17,8 +18,7 @@ function App() {
           </ProtectedRoute>
         }
       >
-        {/* TODO(next commit): index shows ExpensesPage once it exists */}
-        <Route index element={<Navigate to="/categories" replace />} />
+        <Route index element={<ExpensesPage />} />
         <Route path="categories" element={<CategoriesPage />} />
       </Route>
       <Route path="*" element={<Navigate to="/" replace />} />
